@@ -19,7 +19,7 @@ function getTasks()
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM TodoList";
+    $sql = "SELECT * FROM TodoList ORDER BY date_echeance";
     $result = $conn->query($sql);
 
     $tasks = [];
