@@ -102,9 +102,9 @@ function createOrUpdateTask($isUpdate)
 
         // Exécuter la requête SQL
         if ($stmt->execute()) {
+            $conn->close();
             // Rediriger vers index.php après la mise à jour réussie
             header("Location: index.php");
-            $conn->close();
             exit();
         } else {
             $error_message = "Erreur lors de la mise à jour de la tâche.";

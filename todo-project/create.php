@@ -17,43 +17,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <h1>Créer une nouvelle tâche</h1>
+    <div class="container">
+        <div class="row text-center">
+            <h1>Créer une nouvelle tâche</h1>
+        </div>
 
-    <?php
-    if (isset($error_message)) {
-        echo "<p style='color: red;'>$error_message</p>";
-    }
-    ?>
+        <div class="row d-flex mb-3">
+            <div class="col-2">
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='index.php';">Retour à la liste</button>
+            </div>
+        </div>
 
-    <!-- Formulaire de création de tâche -->
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <label for="titre">Titre*:</label>
-        <input type="text" name="titre" required>
-        <br>
-        <label for="description">Description:</label>
-        <textarea name="description"></textarea>
-        <br>
-        <label for="categorie">Catégorie*:</label>
-        <select name="categorie" required>
-            <option value="NONE">Aucune</option>
-            <option value="TODO">Tâche</option>
-            <option value="SHOPPING">Shopping</option>
-            <option value="WORK">Travail</option>
-            <option value="FAMILY">Famille</option>
-        </select>
-        <br>
-        <label for="date_echeance">Date d'échéance:</label>
-        <input type="date" name="date_echeance">
-        <br>
-        <label for="etat">État*:</label>
-        <select name="etat" required>
-            <option value="TODO">À faire</option>
-            <option value="DONE">Terminé</option>
-        </select>
-        <br>
-        <input type="submit" value="Sauver">
-    </form>
+        <?php
+        if (isset($error_message)) {
+            echo "<p style='color: red;'>$error_message</p>";
+        }
+        ?>
 
+        <!-- Formulaire de création de tâche -->
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <div class="mb-3">
+                <label class="form-label" for="titre">Titre*:</label>
+                <input class="form-control" type="text" name="titre" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="description">Description:</label>
+                <textarea class="form-control" name="description"></textarea>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="form-label" for="categorie">Catégorie*:</label>
+                    <select class="form-select" name="categorie" required>
+                        <option value="NONE">Aucune</option>
+                        <option value="TODO">Tâche</option>
+                        <option value="SHOPPING">Shopping</option>
+                        <option value="WORK">Travail</option>
+                        <option value="FAMILY">Famille</option>
+                    </select>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" for="date_echeance">Date d'échéance:</label>
+                    <input class="form-control" type="date" name="date_echeance">
+                </div>
+                <div class="col-4">
+                    <label class="form-label" for="etat">État*:</label>
+                    <select class="form-select" name="etat" required>
+                        <option value="TODO">À faire</option>
+                        <option value="DONE">Terminé</option>
+                    </select>
+                </div>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Sauver">
+        </form>
+    </div>
 </body>
 
 </html>
