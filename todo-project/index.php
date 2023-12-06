@@ -3,6 +3,10 @@ include('functions.php');
 
 $tasks = getTasks();
 
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['delete_id'])) {
+    $deleteId = $_GET['delete_id'];
+    deleteTask($deleteId);
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +26,8 @@ $tasks = getTasks();
         <?php
         foreach ($tasks as $task) {
             echo "<li>{$task['titre']} - {$task['description']} - {$task['categorie']} - {$task['etat']} - Date d'échéance: {$task['date_echeance']}";
-            echo " <a href=\"edit.php?id={$task['id']}\">Éditer</a></li>";
+            echo " <a href=\"edit.php?id={$task['id']}\">Éditer</a>";
+            echo " <a href=\"index.php?delete_id={$task['id']}\">Supprimer</a></li>";
         }
         ?>
     </ul>

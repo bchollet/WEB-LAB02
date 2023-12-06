@@ -56,7 +56,6 @@ function getTaskById($id)
 
 function createOrUpdateTask($isUpdate)
 {
-    // if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($isUpdate) {
         $taskId = $_POST['task_id']; // ID de la tâche à éditer
     }
@@ -67,6 +66,14 @@ function createOrUpdateTask($isUpdate)
     $categorie = $_POST['categorie'];
     $date_echeance = empty($_POST['date_echeance']) ? null : $_POST['date_echeance'];
     $etat = $_POST['etat'];
+
+    if (!is_null($date_echeance)) {
+        $date_to_compare = new DateTime($date_echeance);
+        $today = new DateTime();
+        if ($date_to_compare < $today) {
+            return 'La date d\'échéance ne peut pas être inférieur à aujourd\'hui';
+        }
+    }
 
     // Validation des champs obligatoires
     if (empty($titre) || empty($categorie) || empty($etat)) {
@@ -106,5 +113,27 @@ function createOrUpdateTask($isUpdate)
 
         return $error_message;
     }
-    // }
+}
+
+function deleteTask($id)
+{
+    $conn = getConn();
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Préparer la requête SQL de suppression
+    $sql = "DELETE FROM TodoList WHERE id=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+
+    // Exécuter la requête SQL
+    $stmt->execute();
+
+    // Fermer la connexion à la base de données
+    $conn->close();
+
+    // Rediriger vers index.php après la suppression réussie
+    header("Location: index.php");
 }
