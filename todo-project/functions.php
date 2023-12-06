@@ -6,7 +6,9 @@ function getConn()
     $password = "mariadb";
     $database = "mariadb";
 
-    return new mysqli($servername, $username, $password, $database);
+    $conn = new mysqli($servername, $username, $password, $database);
+    $conn->set_charset("utf8");
+    return $conn;
 }
 
 function getTasks()
