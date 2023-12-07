@@ -14,6 +14,16 @@ Assurez-vous d'avoir docker d'installer. Rendez vous dans le dossier .devcontain
 docker-compose up -d
 ```
 
+Voud devez initialiser la DB en lançant le script se trouvant dans todo-project/sql/V1.sql
+
+Pour se connecter à la DB, voici les informations importnantes:
+
+- adresse: localhost
+- port: 3306
+- database: mariadb
+- username: mariadb
+- password: mariadb
+
 Depuis le dev container rendez vous à la racine du projet:
 
 
